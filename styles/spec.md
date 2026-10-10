@@ -13,13 +13,17 @@ Student Finance Tracker
 Food, Transport, Entertainment, Fees, Other
 
 ## Settings I will save
-- Base currency:
+- Base currency
 - Two other currencies and their rates:
-- Spendig cap:
+- Spendig cap
 
 ## Accesibility plan
 - Landmarks I will use: header, nav, main, section, footer
-- Skip link: 
+- Skip link 
 - From errors will show where
 - Messages that screen readers read out 
 - How someone uses it with only keyboard: Tab, Enter, Esc
+
+## Wireframe notes (details not drawn)
+- Records: sort buttons (date, A to Z, amount) and an "ignore case" checkbox next to search
+- Settings: Import JSON and Export JSON buttons; categories can be added and removed 
