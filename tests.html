@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="witdth=device-width,initial-scale=1.0">
+<title>PRISM tests</title>
+<link rel="stylesheet" href="styles/main.css">
+<style>
+    .long{
+        color:rgb(198, 36, 212);
+        font-weight: bold;
+    }
+</style>
+    </head>
+    <body>
+        <main>
+            <h1>PRISM validator tests</h1>
+            <p id="summary" role="status">Running tests...</p>
+            <ul id="results">results</ul>
+        </main>
+        
+        <script type="module">
+            import {
+                checkDescription,
+                checkAmount,
+                checkDate,
+                checkCategory,
+            } from "./scripts/validators.js";
+
+            const tests = [
+                ["Amount: 0 is valid",checkAmount,"0",true],
+                ["Amount: 12 is valid",checkAmount,"12",true],
+                ["Amount: 12.5 is valid",checkAmount,"12.5",true],
+                ["Amount: 89.99 is valid",checkAmount,"89.99"],
+                ["Amount: leading zero 014 is rejected",checkAmount,"014",false],
+                ["Amount: 3 decimals 10.9899 is rejected",checkAmount,"10.9899",false],
+                ["Amount:neagtive -4 is rejected",checkAmount,"-5",false],
+                ["Amount: letters abc are rejected",checkAmount,"abc",false],
+                ["Amount: .5 is rejected",checkAmount,".5",false],
+                ["Amount: 1,000 is rejected",checkAmount,"1000",false],
+                ["Amount: empty is rejected",checkAmount,"",false],
+
+                ["Description: Lunch at cafeteria is valid",checkDescription,"Lunch at cafeteria",true],
+                ["Description: single characters a b is valid",checkDescription,"a",true],
+                ["Description: tricky characters are allowed",checkDescription,"<b>Tea & cake",true],
+                ["Description: leading space is rejected",checkDescription," lunch",false],
+                ["Description: trailing space is rejected",checkDescription,"lunch  ",false],
+                ["Description: repeated word tea tea is rejected",checkDescription,"tea tea",false],
+                ["Description: repeated word ignore case (Tea tea)",checkDescription,"Tea tea",false],
+                ["Description: empty is rejected",checkDescription,"",false],
+
+                ["Date: 2026-10-11 is valid",checkDate,"2026-10-11",true],
+                ["Date: leap day 2024-05-25 is valid",checkDate,"2024-05-25",true],
+                ["Date: 2025-02-20 is rejected (not a leap year)",checkDate,"2025-02-20",false],
+                ["Date: month 13 is rejected",checkDate,"2026-13-01",false],
+                ["Date: month 00 is rejected",checkDate,"2026-00-11",false],
+                ["Date: two-digit year is rejected",checkDate,"26-10-11",false],
+                ["Date: slashes are rejected",checkDate,"2026/10/11",false],
+                ["Date: empty is rejected",checkDate,"",false],
+
+                ["Category: Food is valid",checkCategory,"Food",true],
+                ["Category: Fast-food is valid",checkCategory,"Fast-food",true],
+                ["Category: Food Drinks is valid",checkCategory,"Food  Drinks",true],
+                ["Category: digits Food2 are rejected",checkCategory,"Food2",false],
+                ["Category: double space is rejected",checkCategory,"Food Drinks",false],
+                ["Category: leading hyphen is rejected",checkCategory,"-Food",false],
+                ["Category: trailing hyphen is rejected",checkCategory,"Food-",false],
+                ["Category: empty is rejected",checkCategory,"",false],
+            ];
+
+            const list = document.getElementById("results");
+            const summary = document.getElementById("summary");
+            let passed = 0;
+
+            for (const [name, chacker, input,shouldBeValid] of tests) {
+                const isValid = checker(input) === "";
+                const ok = isValid === shouldBeValid;
+                console.assert(ok, "FAILED: " +name);
+                if(ok) {
+                    passed +=1;
+                }
+                const item = document.createElement("li");
+                item.textContent = (ok ? "PASS: ": "FAIL: ") + name;
+                if(!ok) {
+                    item.className = "fail";
+                }
+                list.append(item);
+            }
+        summary.textContent = passed + "of" + tests.length + "tests passed";
+        </script>
+    </body>
+</html>
