@@ -141,7 +141,7 @@ footer p{
     margin: 0;
 }
 
-/* @media (min-width: 768px) {
+ @media (min-width: 768px) {
     header {
         display: flex;
         align-items: center;
@@ -175,4 +175,4 @@ footer p{
     nav a {
         transition: none;
     }
-} */
+} 

@@ -5,9 +5,10 @@
     <meta name="viewport" content="witdth=device-width, initial-scale=1.0">
     <title>PRISM</title>    
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/form.css">
 </head>
 <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">Jump to content</a>
 
      <header>
          <h1>PRISM</h1>
@@ -32,8 +33,41 @@
       <h2 id="records-title">Records</h2>
     </section>
 
-    <section id="form" aria-labelledby="records-title">
-    <h2 id="records#">Records</h2>
+    <section id="form" aria-labelledby="form-title">
+    <h2 id="form-title">Add/edit record</h2>
+    <form id="record-form" novalidate>
+
+        <div class="field">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" autocomplete="off" aria-describedby="description-error">
+            <p class="error" id="description-error" aris-live="polite"></p>
+        </div>
+
+        <div class="field">
+            <label for="amount">Amount</label>
+            <input type="text" id="amount" name="amount" inputmode="decimal" autocomplete="off" aria-describedby="amount-error">
+            <p class="error" id="amount-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+        <label for="category">Category</label>
+        <select id="category" name="category" aria-describedby="category-error"></select>
+        <p class="error" id="category-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+        <label for="date">Date(YYYY-MM-DD)</label>
+        <input type="text" id="date" name="date" inputmode="numeric" autocomplete="off" placeholder="2026-10-12" aria-describedby="date-error">
+        <p class="error" id="date-error" aria-live="polite"></p>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Save</button>
+            <button type="reset">Cancel</button>
+        </div>
+
+        <p id="form-status" role="status"></p>
+    </form>
     </section>
 
     <section id="settings" aria-labelledby="settings-title">
@@ -41,12 +75,14 @@
     </section>
 
     <section id="about" aria-labelledby="about-title">
-     <h2 id="about-title">About</h2>
+        <h2 id="about-title">About</h2>
     </section>
 </main>
 
 <footer>
-    <p>PRISM ; 2026; Umuhendakazi Keza Gloire</p>
+    <p>PRISM &middot; 2026 &middot;; Umuhendakazi Keza Gloire</p>
 </footer>
+
+<script type="module" src="scripts/main.js"></script>
 </body>
 </html>

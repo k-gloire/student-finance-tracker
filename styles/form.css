@@ -1,0 +1,76 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin: var(--space-2);
+}
+
+label {
+    font-weight: 600;
+
+}
+
+input,
+select {
+    min-height: 44px;
+    padding: 0 0.75rem;
+    font: inherit;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 2px solid var(--color-muted);
+    border-radius: var(--radius);
+}
+
+input[aria-invalid="true"] {
+    border-color: var(--color-error);
+}
+
+.error {
+    min-height: 1.25rem;
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-error);
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+}
+
+button {
+    min-height: 44px;
+    padding: 0 1.25rem;
+    font: inherit;
+    cursor: pointer;
+    color: var(--color-accent);
+    background: var(--color-surface);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius);
+    transition: background-color 0.15s ease;
+}
+
+button[type="submit"] {
+    color: rgb(211, 178, 241);
+    background: var(--color-accent);
+}
+
+button[type="submit"]:hover {
+    background: var(--color-accent-hover);
+}
+
+button[type="reset"]:hover {
+    background: var(color-page);
+}
+
+#form-status {
+    margin: var(--space-2) 0 0;
+    font-weight: 600;
+    color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    button {
+        transition: none;
+    }
+}
