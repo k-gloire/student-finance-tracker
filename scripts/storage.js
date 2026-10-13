@@ -2,7 +2,7 @@ const KEY = "prism:data";
 
 export function load() {
     try{
-        const data = JSON.parse(localStorage.getITem(KEY) || "[]");
+        const data = JSON.parse(localStorage.getItem(KEY) || "[]");
         return Array.isArray(data) ? data : [];
     }
     catch{

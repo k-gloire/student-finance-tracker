@@ -1,4 +1,4 @@
-import {load, save} from "/storage.js";
+import {load, save} from "./storage.js";
 
 const categories = ["Food","Transport","Entertainment","Fees","Others"];
 const records = load();

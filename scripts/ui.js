@@ -1,10 +1,10 @@
-import { validateRecord, hasErrors, collapseSapces } from "/validators.js";
-import { getCategories, addRecord } from "./state";
+import { validateRecord, hasErrors, collapseSpaces } from "./validators.js";
+import { getCategories, addRecord } from "./state.js";
 
 const fieldNames = ["description", "amount","category","date"];
 function readValues(form) {
     return {
-        description: collapseSapces(form.elements.description.value),
+        description: collapseSpaces(form.elements.description.value),
         amount: form.elements.amount.value,
         category: form.elements.category.value,
         date: form.elements.date.value,  
@@ -48,7 +48,7 @@ export function initForm() {
     }
 
     form.addEventListener("submit", (event) => {
-        EventTarget.preventDefault();
+        event.preventDefault();
         const values = readValues(form);
         const errors = validateRecord(values);
        for (const name of fieldNames) {
