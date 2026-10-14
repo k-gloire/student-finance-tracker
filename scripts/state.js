@@ -34,3 +34,27 @@ export function addRecord({ description, amount, category,date}) {
     save(records);
     return record;
 }
+
+export function updateRecord(id, {description,amount,categroy,date}) {
+    const record = records.find((item) => item.id === id);
+    if (!record) {
+        return null;
+    }
+    record.description = description;
+    record.amount = Number(amount);
+    record.category = category;
+    record.date = date;
+    record.updateAt = new Date().toISOString();
+    save(records);
+    return;
+}
+
+export function deleteRecord(id) {
+    const index = records.findIndex((item) => item.id === id);
+    if (index === -1) {
+        return false;
+    }
+    records.splice(index, 1);
+    save(records);
+    return true;
+}
