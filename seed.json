@@ -1,0 +1,127 @@
+[ {
+    "id": "txn_0001",
+    "description": "Lunch at cafeteria",
+    "amount": 12.5,
+    "category": "Food",
+    "date": "2026-09-25",
+    "createdAt": "2026-09-25T10:00:00.000Z",
+    "updatedAt": "2026-09-25T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0002",
+    "description": "Chemistry textbook",
+    "amount": 89.99,
+    "category": "Other",
+    "date": "2026-09-23",
+    "createdAt": "2026-09-23T10:00:00.000Z",
+    "updatedAt": "2026-09-23T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0003",
+    "description": "Bus pass",
+    "amount": 45,
+    "category": "Transport",
+    "date": "2026-09-20",
+    "createdAt": "2026-09-20T10:00:00.000Z",
+    "updatedAt": "2026-09-20T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0004",
+    "description": "Coffee with friends",
+    "amount": 8.75,
+    "category": "Entertainment",
+    "date": "2026-09-28",
+    "createdAt": "2026-09-28T10:00:00.000Z",
+    "updatedAt": "2026-09-28T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0005",
+    "description": "Coffee coffee break",
+    "amount": 3.5,
+    "category": "Food",
+    "date": "2026-10-02",
+    "createdAt": "2026-10-02T10:00:00.000Z",
+    "updatedAt": "2026-10-02T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0006",
+    "description": "Leap day snacks",
+    "amount": 6.25,
+    "category": "Food",
+    "date": "2024-02-29",
+    "createdAt": "2026-09-01T10:00:00.000Z",
+    "updatedAt": "2026-09-01T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0007",
+    "description": "New Year's Eve taxi",
+    "amount": 18,
+    "category": "Transport",
+    "date": "2025-12-31",
+    "createdAt": "2026-09-01T10:00:00.000Z",
+    "updatedAt": "2026-09-01T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0008",
+    "description": "Tea & cake <b>\"treat\"</b>",
+    "amount": 4.2,
+    "category": "Food",
+    "date": "2026-10-05",
+    "createdAt": "2026-10-05T10:00:00.000Z",
+    "updatedAt": "2026-10-05T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0009",
+    "description": "Tuition fee",
+    "amount": 1234567.89,
+    "category": "Fees",
+    "date": "2026-01-01",
+    "createdAt": "2026-01-01T10:00:00.000Z",
+    "updatedAt": "2026-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0010",
+    "description": "Free sample",
+    "amount": 0,
+    "category": "Food",
+    "date": "2026-10-08",
+    "createdAt": "2026-10-08T10:00:00.000Z",
+    "updatedAt": "2026-10-08T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0011",
+    "description": "Pen",
+    "amount": 0.01,
+    "category": "Other",
+    "date": "2026-10-09",
+    "createdAt": "2026-10-09T10:00:00.000Z",
+    "updatedAt": "2026-10-09T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0012",
+    "description": "A",
+    "amount": 1,
+    "category": "Other",
+    "date": "2026-10-10",
+    "createdAt": "2026-10-10T10:00:00.000Z",
+    "updatedAt": "2026-10-10T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0013",
+    "description": "Café crème",
+    "amount": 5.5,
+    "category": "Food",
+    "date": "2026-10-11",
+    "createdAt": "2026-10-11T10:00:00.000Z",
+    "updatedAt": "2026-10-11T10:00:00.000Z"
+  },
+  {
+    "id": "txn_0014",
+    "description": "Group project printing, binding and delivery of the final report for the whole team, including extra copies",
+    "amount": 23,
+    "category": "Other",
+    "date": "2026-10-12",
+    "createdAt": "2026-10-12T10:00:00.000Z",
+    "updatedAt": "2026-10-12T10:00:00.000Z"
+  }
+]
