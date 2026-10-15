@@ -1,9 +1,8 @@
 import { validateRecord, hasErrors, collapseSpaces, checkAmount } from "./validators.js";
-import { getCategories, getCap , setCap, addRecord, updateRecord, deleteRecord, getRecords} from "./state.js";
-import { compileRegex, matchesRecord, appendHighlighted } from "./sort.js";
+import { getRecords, getCategories, getCap, setCap, addRecord, updateRecord, deleteRecord} from "./state.js";
 import { compileRegex, matchesRecord, appendHighlighted} from "./search.js";
 import { sortRecords }  from "./sort.js";
-import { toCents, formatCents, formatCompact, countRecords, totalCents, topCategory, dailyTotals, capStatus, todayString,} from "./stats.js"
+import { toCents, formatCents, formatCompact, countRecords, totalCents, topCategory, dailyTotals, capStatus, todayString,} from "./stats.js";
 
  const fieldNames = ["description", "amount","category","date"];
  const sortLabels = {date: "Date",description: "Description", amount:"Amount"};
@@ -13,7 +12,6 @@ import { toCents, formatCents, formatCompact, countRecords, totalCents, topCateg
  let sortDirection = "desc";
 
  function refreshAll() {
-    renderRecordsAll() 
         renderRecords();
         renderDashboard();
     }
@@ -63,9 +61,9 @@ function startEdit(record) {
     form.elements.description.value=record.description;
     form.elements.amount.value=String(record.amount);
     form.elements.category.value=record.category;
-    form.elemets.date.value=record.date;
+    form.elements.date.value=record.date;
     setEditMode(record);
-    document.getElementById("form-status").textContent ="Editing" + record.description + ".";
+    document.getElementById("form-status").textContent =" Editing" + record.description + ".";
     form.elements.description.focus();
 }
 
@@ -126,10 +124,6 @@ export function initForm() {
     status.textContent=message;
     form.elements.description.focus();
 
-    addRecord(values);
-       form.reset();
-       status.textContent = "Record saved.";
-       form.elements.description.focus();
     });
 
     form.addEventListener("reset", () => {
@@ -142,8 +136,8 @@ export function initForm() {
 }
 
 function buildCell(label, text,regex) {
-    const cell=document.createElemet("id");
-    cell.database.label=label;
+    const cell=document.createElement("td");
+    cell.dataset.label = label;
     const value=document.createElement("span");
     value.className="cell-value";
     appendHighlighted(value,text,regex);
@@ -154,7 +148,7 @@ function buildCell(label, text,regex) {
 function buildButton(text, ariaLabel,onClick,extraClass) {
     const button = document.createElement("button");
     button.type="button";
-    button.textContent="text";
+    button.textContent = text;
     button.setAttribute("aria-label",ariaLabel);
     if(extraClass) {
         button.className=extraClass;
@@ -166,7 +160,7 @@ function buildButton(text, ariaLabel,onClick,extraClass) {
 function buildRow(record, regex) {
     const row = document.createElement("tr");
     row.append(
-     buildCell("description",record.description,regex),
+     buildCell("Description",record.description,regex),
      buildCell("Amount",record.amount.toFixed(2),regex),
      buildCell("Category",record.category,regex),
      buildCell("Date",record.date,regex)
@@ -174,11 +168,11 @@ function buildRow(record, regex) {
 
     const actionsCell = document.createElement("td");
     actionsCell.dataset.label="Actions";
-    const actions=doccument.createElement("div");
+    const actions=document.createElement("div");
     actions.className="row-actions";
     actions.append(
-        buildButton("Edit", "Edit" + record.description, () => startEdit(record)),
-        buildButton("Delete","Delete" + record.description,() => removeRecord(record),"danger")
+        buildButton("Edit ", "Edit" + record.description, () => startEdit(record)),
+        buildButton("Delete ","Delete" + record.description,() => removeRecord(record),"danger")
     );
     actionsCell.append(actions);
     row.append(actionsCell);
@@ -211,12 +205,13 @@ function renderRecords() {
     } else if (getRecords().length === 0) {
         emptyState.textContent = "No records yet. Add one with the form";
     } else {
-        return records.length;
+        return emptyState.textContent = "No records match your search";
     }
+    return records.length;
 }
 
 function updateSortButtons() {
-    for (const button of document.querySelectorAll("[data-sort")) {
+    for (const button of document.querySelectorAll("[data-sort]")) {
         const key = button.dataset.sort;
         const active = key === sortKey;
         button.setAttribute("aria-pressed", String(active));
@@ -232,12 +227,13 @@ export function initRecords() {
 
     function onSearchChange() {
         const shown = renderRecords();
-        status.textContent = shown + " of " +getRecords().length + "records shown";
-    
+        status.textContent = shown + " of " + getRecords().length + " records shown";
+    }
+
     searchinput.addEventListener("input", onSearchChange);
     IgnoreCase.addEventListener("change", onSearchChange);
     
-    for(const button of document.querySelectorAll("[data-sort")) {
+    for(const button of document.querySelectorAll("[data-sort]")) {
         button.addEventListener("click", () => {
             const key = button.dataset.sort;
             if (key === sortKey) {
@@ -246,13 +242,13 @@ export function initRecords() {
                 sortKey=key;
                 sortDirection=key === "date" ? "desc" : "asc";
             }
-            UpdateSortButtons();
+            updateSortButtons();
             renderRecords();
             status.textContent = "Sorted by" + sortLabels[key].toLowerCase() + "," + (sortDirection === "asc" ? "ascending":"descending") + ".";
         });
     }
 
-    UpdateSortButtons();
+    updateSortButtons();
     renderRecords();
 }
 
@@ -264,7 +260,7 @@ function renderChart(records) {
     list.replaceChildren();
     days.forEach((day,index)=> {
         const [year,month, date] =day.date.split("-").map(Number);
-        const dayName= new Date(year,month-1,date).toLocateDateString("en-GB", {
+        const dayName= new Date(year,month-1,date).toLocaleDateString("en-GB", {
             weekday:"short",
             day:"numeric",
         }); 
@@ -287,7 +283,7 @@ function renderChart(records) {
         const value=document.createElement("span");
         value.className="bar-value";
         value.setAttribute("aria-hidden","true");
-        value.textContent=formalCompact(day.cents);
+        value.textContent=formatCompact(day.cents);
 
         const text= document.createElement("span");
         text.className="bar-label";
@@ -319,11 +315,11 @@ function renderCap(spent) {
         polite.textContent= "";
         assertive.textContent="";
      } else if (result.state === "under") {
-        boxValue.textContent = formatCents(result.diffCents) + "left";
-        polite.textContent = "You have " + formatCents(Capcents) + "cap.";
+        boxValue.textContent = formatCents(result.diffCents) + " left";
+        polite.textContent = "You have " + formatCents(capCents) + " cap.";
         assertive.textContent= ""; 
      } else { boxValue.textContent = formatCents(result.diffCents) + " over ";
-        assertive.textContent = " You are " + formatCents(result.diffCents) + " over you " + formatCents(capCents) + "cap.";
+        assertive.textContent = " You are " + formatCents(result.diffCents) + " over your " + formatCents(capCents) + "cap.";
         polite.textContent="";
      }
 }
@@ -338,7 +334,7 @@ function renderDashboard() {
     document.getElementById("stat-total").textContent = formatCents(spent);
     document.getElementById("stat-top").textContent = top ? top.name : "None yet";
 
-    renderChart(record);
+    renderChart(records);
     renderCap(spent);
 
 }
@@ -375,7 +371,7 @@ export function initDashboard() {
     return;
     }
 
-    const message = checkAmount(input, value);
+    const message = checkAmount(input.value);
     showCapError(message);
     if(message) {
     input.focus();
@@ -389,6 +385,4 @@ export function initDashboard() {
 
     renderDashboard();
    
-   } 
-
-}
+   }
