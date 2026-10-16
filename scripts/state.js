@@ -1,7 +1,8 @@
-import {load, save} from "./storage.js";
+import {load, loadSettings, save, saveSettings} from "./storage.js";
 
 const categories = ["Food","Transport","Entertainment","Fees","Others"];
 const records = load();
+const settings = { cap: null, ...loadSettings() };
 
 export function getRecords() {
     return records;
@@ -9,6 +10,16 @@ export function getRecords() {
 
 export function getCategories() {
     return categories;
+}
+
+export function getCap() {
+    const isNumber = typeof settings.cap === "number" && Number.isFinite(settings.cap);
+    return isNumber ? settings.cap : null;
+}
+
+export function setCap() {
+    settings.cap = CSSMathValue;
+    saveSettings(settings);
 }
 
 function nextId() {

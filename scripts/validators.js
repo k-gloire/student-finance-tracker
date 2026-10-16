@@ -37,6 +37,10 @@ export function checkDate(value) {
     if(!patterns.date.test(value)) {
         return "Use the format YYYY-MM-DD.";
     }
+
+    const [year, month, day] = value.split("-").map(Number);
+    const date = new Date(year, month - 1, day);
+
     if(date.getFullYear()!== year||date.getMonth() !==month - 1||date.getDate() !==day){
         return "This date does not exist.";
     }
@@ -53,12 +57,12 @@ export function checkCategory(value) {
     return "";
 }
 
-export function validateRecord (description,amount,category,date) {
+export function validateRecord ({description,amount,category,date}) {
     return {
-        description:checkDescription(description),
-        amount:checkAmount(amount),
-        category:checkCategory(category),
-        date:checkDate(date),
+        description: checkDescription(description),
+        amount: checkAmount(amount),
+        category: checkCategory(category),
+        date: checkDate(date),
     };
 }
 

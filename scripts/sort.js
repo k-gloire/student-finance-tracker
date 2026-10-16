@@ -1,9 +1,13 @@
 function compareDate(a, b) {
-    return 0;
+    return a.date.localeCompare(b.date);
 }
 
 function compareAmount(a, b) {
-    return 0;
+   return a.amount - b.amount;
+}
+
+function compareDescription(a, b) {
+    return String (a.description || "").localeCompare(String(b.description || ""));
 }
 
 const comparers = {
@@ -14,5 +18,5 @@ const comparers = {
 
 export function sortRecords(records, key, direction) {
     const sign = direction === "asc" ? 1 : -1;
-    return [...records].sort((a, b) => sign * comparers[key](a.b));
+    return [...records].sort((a, b) => sign * comparers[key](a,b));
 }

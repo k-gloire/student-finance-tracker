@@ -61,7 +61,7 @@
     
        <div  class="toolbar">
         <div class="field">
-            <label for="search">Search (regex pattern)</label>
+            <label for="search">Search (regex pattern): </label>
             <input type="text" id="search" autocomplete="off" aria-describedby="search-error">
         </div>
         <label class="checkbox-field">
@@ -134,11 +134,79 @@
     </section>
 
     <section id="settings" aria-labelledby="settings-title">
-        <h2 id="settings-title">Settings</h2>
+        <h2 id="settings-title">Settings</h2> 
+           <h3>Currency Settings</h3>
+        <div class="field">
+            <label for="base-currency">Base currency</label>
+            <select id="base-currency" name="base-currency">
+                <option value="RWF">Rwandan Franc (RWF)</option>
+                <option value="USD">US Dollar (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="usd-rate">Exchange rate: 1 USD equals how many RWF?</label>
+            <input type="number" id="usd-rate" name="usd-rate" min="0.000001" step="any" placeholder="Enter exchange rate">
+        </div>
+
+        <div class="field">
+            <label for="eur-rate">Exchange rate: 1 EUR equals how many RWF?</label>
+                <input type="number" id="eur-rate" name="eur-rate" min="0.000001" step="any" placeholder="Enter exchange rate">
+        </div>
+
+        <button type="button" id="save-currency">Save currency settings</button>
+        <p id="currency-status" role="status" aria-live="polite"></p>
+
+       <form id="cap-form" novalidate>
+        <div class="field">
+            <label for="cap">Spending cap</label>
+            <input type="text" id="cap" name="cap" inputmode="decimal" autocomplete="off" aria-describedby="cap-error">
+            <p class="error" id="cap-error" aria-live="polite"></p>
+        </div>
+
+        <button type="submit">Save cap</button>
+        <p id="cap-status" role="status"></p>
+       </form>
     </section>
 
     <section id="about" aria-labelledby="about-title">
         <h2 id="about-title">About</h2>
+
+        <p>
+            PRISM is a student finance tracker designed to help students 
+            manage daily expenses and make better financial decisions. 
+            Users can record transactions,organize expenses by category,
+            search and sort records, and monitor spending through a 
+            dashboard and weekly chart.
+        </p>
+
+        <h3>Our Purpose</h3>
+        <p>
+            Managing money as a student can be challenging. PRISM makes 
+            it easier to understand spending habits, track expenses, 
+            and stay within a set spending limit.
+        </p>
+
+        <h3>Technologies Used</h3>
+        <ul>
+            <li>HTML for semantic structure</li>
+            <li>CSS for responsive designand styling</li>
+            <li>Javascript for validation, search, sorting, and data management</li>
+        </ul>
+
+        <h3>Contact</h3>
+        <p>Developer: Umuhendakazi Keza Gloire</p>
+        <p>
+            GitHub:
+            <a href="https://github.com/k-gloire" target="_blank"
+            rel="noopener noreferrer">k-gloire</a>
+        </p>
+
+        <p>
+            Email:
+            <a href="mailto:g.umuhendak@alustudent.com">g.umuhendak@alustudent.com</a>
+        </p>
     </section>
 </main>
 

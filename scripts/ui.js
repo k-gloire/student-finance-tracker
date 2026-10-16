@@ -244,7 +244,7 @@ export function initRecords() {
             }
             updateSortButtons();
             renderRecords();
-            status.textContent = "Sorted by" + sortLabels[key].toLowerCase() + "," + (sortDirection === "asc" ? "ascending":"descending") + ".";
+            status.textContent = "Sorted by: " + sortLabels[key].toLowerCase() + "," + (sortDirection === "asc" ? "ascending":"descending") + ".";
         });
     }
 
