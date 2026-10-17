@@ -6,8 +6,8 @@
 <title>PRISM tests</title>
 <link rel="stylesheet" href="styles/main.css">
 <style>
-    .long{
-        color:rgb(198, 36, 212);
+    .fail {
+        color: #b42318;
         font-weight: bold;
     }
 </style>
@@ -25,7 +25,21 @@
                 checkAmount,
                 checkDate,
                 checkCategory,
+                checkRate,
+                validateRecordList,
             } from "./scripts/validators.js";
+
+            const checkImport = (data) => (validateRecordList(data).length === 0 ? "": "invalid");
+
+            const good = { 
+                id: "txn_0001",
+                description: "Lunch",
+                amount: 15.5,
+                category: "Food",
+                date: "2026-10-11",
+                createdAt: "2026-10-11T10:00:00.0000Z",
+                updatedAt: "2026-110-11T10:00:00.0000Z",
+            };
 
             const tests = [
                 ["Amount: 0 is valid",checkAmount,"0",true],
@@ -66,7 +80,35 @@
                 ["Category: leading hyphen is rejected",checkCategory,"-Food",false],
                 ["Category: trailing hyphen is rejected",checkCategory,"Food-",false],
                 ["Category: empty is rejected",checkCategory,"",false],
-            ];
+            
+
+                ["Rate: 1500 is valid", checkRate, "1500", true],
+                ["Rate: 1.05 is valid", checkRate, "1.05", true],
+                ["Rate: 0.000001 is valid", checkRate, "0.000001", true],
+                ["Rate: 7 decimals id rejected", checkRate, "0.00000001", false],
+                ["Rate: sero is rejected", checkRate, "0", false],
+                ["Rate: leading zero 015 is rejected", checkRate, "015", false],
+                ["Rate: letters are rejected", checkRate, "xyz", false],
+                ["Rate: comma 1,8 is rejected", checkRate, "1,8", false],
+
+                ["Import: one goood record is valid", checkImport, [good], true],
+                ["Import: an empty list is valid", checkImport, [], true],
+                ["Import: amount 0.01 is valid", checkImport, [{ ...good,amount: 0.01}], true],
+                ["Import: repeated word is allowed in files", checkImport, [{ ...good, description: "coffee coffee" }], true],
+                ["Import: text instead of a list is rejected", checkImport, "not a list", false],
+                ["Import: an object instead of a list is rejected", checkImport, { records: []}, false],
+                ["Import: duplicate ids are rejected", checkImport, [good, good], false],
+                ["Import: impossible date 2026-02-31 is rejected", checkImport, [{ ...good, date: "2026-02-31" }], false],
+                ["Import: amount as a text is rejected", checkImport, [{ ...good, amount: "1.344"}], false],
+                ["Import: negative amount is rejected", checkImport, [{ ...good, amount: -1}], false],
+                ["Import:  3 decimals is rejected", checkImport, [{ ...good, amount: "1.233" }], false],
+                ["Import: leading space in description is rejected", checkImport, [{ ...good, description: " x"}], false],
+                ["Import: category with a digit is rejected", checkImport, [{ ...good, category: "Food2" }], false],
+                ["Import: missing id is rejected", checkImport, [{ ...good, id: undefined }], false],
+                ["Import: bad timestamp is rejected", checkImport, [{ ...good, createdAt: "yesterday" }], false],
+                ["Import: null item is rejected", checkImport, [null], false],
+
+                ];
 
             const list = document.getElementById("results");
             const summary = document.getElementById("summary");

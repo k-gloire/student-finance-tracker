@@ -82,6 +82,20 @@ export function updateRecord(id, {description,amount,category,date}) {
     return;
 }
 
+export function replaceRecords(list) {
+    const clean = list.map((item) => ({
+        id: item.id,
+        description: item.description,
+        amount: item.amount,
+        category: item,category,
+        date: item.date,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt
+    }));
+    records.splice(0,records.length, ...clean);
+    save(records);
+}
+
 export function deleteRecord(id) {
     const index = records.findIndex((item) => item.id === id);
     if (index === -1) {

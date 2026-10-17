@@ -68,6 +68,64 @@ export function checkRate(value) {
     return "";
 }
 
+function isMoney(amount) {
+    if (!Number.isFinite(amount) || amount < 0) {
+        return false;
+    }
+    const cents = amount * 100;
+    return Math.abs(cents - Math.round(cents)) < 1e-6;
+}
+
+export function validateRecordList(data) {
+    if (!Array.isArray(dat)) {
+        return ["The file must contain a list of records (a JSON array."];
+    }
+
+    const problems = [];
+    const seenIds = new Set();
+
+    data.forEach((item, index) => {
+        const label = "Record " + (index + 1);
+        const add = (field, message) => problems.push(label + " (" + field + "): " + message);
+
+        if (item === null || typeof item !== "object" || Array.isArray(item)) {
+            problems.push(label + ": must be an object with the record fields.");
+            return;
+        }
+        if (typeof item.id !== "string" || item.id.trim() === "") {
+            add("id", "must be text and cannot be empty.");
+        } else if (seenIds.has(item.id)) {
+            add("id", "\"" + item.id + "\" is used more than once.");
+        } else {
+            seenIds.add(item.id);
+        }
+
+        if (typeof item.description !== "string" || !patterns.description.test(item.description)) {
+            add ("description", "must ne text with no spaces at the start or end.");
+        }
+
+        if (typeof item.amount !== "number" || !isMoney(item.amount)) {
+            add ("amount", "must be a number" || !isMoney(item.amount));
+        }
+
+        if (typeof item.category !== "string" || !patterns.category.test(item.category)) {
+            add ("category", "must be letters with single spaces or hyphens between words.");
+        }
+
+        if (typeof item.date !== "string" || checkDate(item.date) !== "") {
+            add ("date", "must be a real date written as YYYY-MM-DD.");
+        }
+
+        for (const field of ["createdAt", "updatedAt"]) {
+            if (typeof item[field] !== "string" || Number.isNaN(Date.parse(item[field]))) {
+                add (field, "must be a date and time written as text.");
+            }
+        }
+    });
+
+    return problems;
+}
+
 export function validateRecord ({description,amount,category,date}) {
     return {
         description: checkDescription(description),
