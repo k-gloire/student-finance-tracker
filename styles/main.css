@@ -50,7 +50,7 @@ h2 {
     font-size: 1.4rem;
 }
 
-.skip-link {
+.skip-link:focus {
   position: absolute;
   top: -4rem;
   left: var(--space-2);
@@ -62,7 +62,7 @@ h2 {
   transition: top 0.2s ease;
 }
 
-.skip-link:focus{
+.skip-link{
     top: var(--space-2);
 }
 

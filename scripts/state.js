@@ -1,6 +1,7 @@
 import {load, loadSettings, save, saveSettings} from "./storage.js";
 
 const categories = ["Food","Transport","Entertainment","Fees","Others"];
+const currencies = ["RWF", "USD", "EUR"];
 const records = load();
 const settings = { cap: null, ...loadSettings() };
 
@@ -17,8 +18,29 @@ export function getCap() {
     return isNumber ? settings.cap : null;
 }
 
-export function setCap() {
-    settings.cap = CSSMathValue;
+export function setCap(value) {
+    settings.cap = value;
+    saveSettings(settings);
+}
+
+export function getCurrencies() {
+    return currencies;
+}
+
+export function getBaseCurrency() {
+    return currencies.includes(settings.baseCurrency) ? settings.baseCurrency : "RWF";
+}
+
+export function getRates(base) {
+
+    const all = settings.rates && typeof settings.rates === "object" ? settings.rates : {};
+    const forBase = all[base];
+    return forBase && typeof forBase === "object" ? {...forBase } : {};
+}
+
+export function setCurrencySettings(base, rates) {
+    settings.baseCurrency = base;
+    settings.rates = { ...settings.rates,[base]: rates};
     saveSettings(settings);
 }
 
@@ -39,14 +61,14 @@ export function addRecord({ description, amount, category,date}) {
         category,
         date,
         createdAt: now,
-        updateAt: now,
+        updatedAt: now,
     };
     records.push(record);
     save(records);
     return record;
 }
 
-export function updateRecord(id, {description,amount,categroy,date}) {
+export function updateRecord(id, {description,amount,category,date}) {
     const record = records.find((item) => item.id === id);
     if (!record) {
         return null;

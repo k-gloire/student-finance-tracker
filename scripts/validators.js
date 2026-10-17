@@ -3,6 +3,7 @@ export const patterns = {
     amount: /^(0|[1-9]\d*)(\.\d{1,2})?$/,
     date: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/,
     category: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/,
+    rate:/^(0|[1-9]\d*)(\.\d{1,6})?$/,
     repetedWord: /\b(\w+)\s+\1\b/i,
 };
 
@@ -53,6 +54,16 @@ export function checkCategory(value) {
     }
     if (!patterns.category.test(value)) {
         return "Use letters only.";
+    }
+    return "";
+}
+
+export function checkRate(value) {
+    if(!patterns.rate.test(value)) {
+        return "Enter a number like 1500 or 1.05 (up to 6 decimals).";
+    }
+    if(Number(value) <= 0) {
+        return "The rate must be greater than 0."
     }
     return "";
 }

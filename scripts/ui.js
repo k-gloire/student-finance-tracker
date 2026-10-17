@@ -11,7 +11,7 @@ import { toCents, formatCents, formatCompact, countRecords, totalCents, topCateg
  let sortKey = "date";
  let sortDirection = "desc";
 
- function refreshAll() {
+ export function refreshAll() {
         renderRecords();
         renderDashboard();
     }

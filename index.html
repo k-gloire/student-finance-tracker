@@ -136,6 +136,7 @@
     <section id="settings" aria-labelledby="settings-title">
         <h2 id="settings-title">Settings</h2> 
            <h3>Currency Settings</h3>
+           <form id="currency-form" novalidate>
         <div class="field">
             <label for="base-currency">Base currency</label>
             <select id="base-currency" name="base-currency">
@@ -144,19 +145,24 @@
                 <option value="EUR">Euro (EUR)</option>
             </select>
         </div>
+          <div class="field">
+            <label for="rate-1" id="rate-1-label"></label>
+            <input type="text" id="rate-1" name="rate-1" inputmode="decimal" autocomplete="off" aria-describedby="rate-1-error">
+            <p class="error" id="rate-1-error" aria-live="polite"></p>
+          </div>
 
-        <div class="field">
-            <label for="usd-rate">Exchange rate: 1 USD equals how many RWF?</label>
-            <input type="number" id="usd-rate" name="usd-rate" min="0.000001" step="any" placeholder="Enter exchange rate">
+          <div class="field">
+            <label for="rate-2" id="rate-2-label"></label>
+            <input type="text" id="rate-2" name="rate-2" inputmode="decimal" autocomplete="off" aria-describedby="rate-2-error" aria-live="polite">
+            <p class="error" id="rate-2-error" aria-live="polite"></p>
+          </div>
+
+        <div class="form-actions">
+        <button type="submit">Save currency settings</button>
         </div>
-
-        <div class="field">
-            <label for="eur-rate">Exchange rate: 1 EUR equals how many RWF?</label>
-                <input type="number" id="eur-rate" name="eur-rate" min="0.000001" step="any" placeholder="Enter exchange rate">
-        </div>
-
-        <button type="button" id="save-currency">Save currency settings</button>
-        <p id="currency-status" role="status" aria-live="polite"></p>
+        <p id="currency-status" role="status"></p>
+        </form>
+    
 
        <form id="cap-form" novalidate>
         <div class="field">
