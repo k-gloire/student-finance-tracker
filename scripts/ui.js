@@ -1,5 +1,5 @@
 import { validateRecord, hasErrors, collapseSpaces, checkAmount } from "./validators.js";
-import { getRecords, getCategories, getCap, setCap, addRecord, updateRecord, deleteRecord, importRecords} from "./state.js";
+import { getRecords, getCategories, getCap, setCap, addRecord, updateRecord, deleteRecord } from "./state.js";
 import { compileRegex, matchesRecord, appendHighlighted} from "./search.js";
 import { sortRecords }  from "./sort.js";
 import { toCents, formatCents, formatCompact, countRecords, totalCents, topCategory, dailyTotals, capStatus, todayString,} from "./stats.js";
@@ -386,30 +386,3 @@ export function initDashboard() {
     renderDashboard();
    
    }
-
-export function initImport() {
-    const input = document.getElementById("import-file");
-    const status = document.getElementById("data-status");
-    const errorList = document.getElementById("import-error");
-
-    if (!input) return;   
-     input.addEventListener("change", async() => {
-        const file = input.files[0];
-        if(!file) return;
-
-        try {
-            const text = await file.text();
-            const imported = JSON.parse(text);
-
-            importRecords(imported);
-            refreshAll();
-
-            if (status) status.textContent = "Records imported successfully.";
-            if (errorList) errorList.textContent = "";
-        } catch (error) {
-            if (status) status.textContent = "";
-            if (errorList) errorList.textContent = error.message;
-        }
-        input.value = "";
-     });
-}
