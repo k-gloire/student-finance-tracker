@@ -77,7 +77,7 @@ function isMoney(amount) {
 }
 
 export function validateRecordList(data) {
-    if (!Array.isArray(dat)) {
+    if (!Array.isArray(data)) {
         return ["The file must contain a list of records (a JSON array."];
     }
 

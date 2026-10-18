@@ -1,5 +1,5 @@
 const KEY = "prism:data";
-const SETTINGS_KEY = "prism:data";
+const SETTINGS_KEY = "prism:settings";
 
 export function load() {
     try{

@@ -130,3 +130,17 @@ export function deleteRecord(id) {
     save(records);
     return true;
 }
+
+export function importRecords(importedRecords) {
+    if (!Array.isArray(importedRecords)) {
+        throw new Error("The JSON file must contain records.");
+    }
+    const validRecords = importedRecords.filter((record) => record && typeof record.description === "string" && Number.isFinite(Number(record.amount)) && 
+    typeof record.category === "string" && typeof record.date === "string");
+
+    if (validRecords.length !== importedRecords.length) {
+        throw new Error("Some records aremissing required fields.");
+    }
+    records.splice(0, records.length,...validRecords);
+    save(records);
+}
