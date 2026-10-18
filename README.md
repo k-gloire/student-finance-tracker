@@ -4,7 +4,7 @@ A responsive, accessible expense tracker for students, built with plain HTML, CS
 
 - **Theme chosen:** Student Finance Tracker
 - **Live site (GitHub Pages):** https://k-gloire.github.io/student-finance-tracker/
-- **Demo video (unlisted):** [paste your video link here]
+- **Demo video (unlisted):** https://www.loom.com/share/a1b8349534614eb5b9b2c741cc3e6773
 - **Author:** Umuhendakazi Keza Gloire GitHub: k-gloire https://github.com/k-gloire, g.umuhendak@alustudent.com
 
 ## Features
