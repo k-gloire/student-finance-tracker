@@ -11,7 +11,7 @@ A responsive, accessible expense tracker for students, built with plain HTML, CS
 
 - **Records:** add, edit and delete transactions (description, amount, category, date). Every record has a unique id and `createdAt` / `updatedAt` timestamps.
 - **Validation:** six regex rules with inline error messages that are announced to screen readers.
-- **Sorting:** by date, description (A to Z) and amount, ascending or descending.
+- **Sorting:** by date and amount, ascending or descending.
 - **Live regex search:** type a pattern, toggle case-insensitive, matches are highlighted with `<mark>`. An invalid pattern never crashes the app.
 - **Dashboard:** total records, total spent, top category, a last-7-days bar chart and a spending cap with remaining or over-cap messages.
 - **Settings:** a base currency plus two others with manual exchange rates, an editable category list and a spending cap.
