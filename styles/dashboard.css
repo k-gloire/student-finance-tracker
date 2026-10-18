@@ -94,6 +94,26 @@
     overflow-wrap: anywhere;
 }
 
+.category-list {
+    display: grid;
+    gap: var(--space-1);
+    margin: 0 0 var(--space-2);
+    padding: 0;
+    list-style: none;
+    justify-items: stretch;
+}
+
+.category-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: var(--space-2);
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
 @keyframes grow {
     from {
         transform: scaleY(0);

@@ -184,7 +184,21 @@
         <input type="file" id="import-file" accept=".json,application/json" aria-describedby="data-status">
        </div>
        <p id="data-status" role="status"></p>
-       <ul id="import-errors" class="import-errors"></ul>
+       <ul id="import-error" class="import-error"></ul>
+
+       <h3>Categories</h3>
+       <form id="category-form" novalidate>
+        <div class="field">
+            <label for="new-category">New category</label>
+            <input type="text" id="new-category" name="new-category" autocomplete="off" aria-describedby="new-category-error">
+            <p class="error" id="new-category-error" aria-live="polite"></p>
+        </div>
+        <div class="form-actions">
+            <button type="submit">Add category</button>
+        </div>
+       </form>
+       <ul class="category-list" id="category-list"></ul>
+       <p id="category-status" role="status"></p>
     </section>
 
     <section id="about" aria-labelledby="about-title">

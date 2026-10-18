@@ -1,16 +1,41 @@
 import {load, loadSettings, save, saveSettings} from "./storage.js";
 
-const categories = ["Food","Transport","Entertainment","Fees","Others"];
+const defaultCategories = ["Food","Transport","Entertainment","Fees","Others"];
 const currencies = ["RWF", "USD", "EUR"];
 const records = load();
-const settings = { cap: null, ...loadSettings() };
+const settings = { cap: null, baseCurrency: "RWf", rates: {}, categories: [...defaultCategories], ...loadSettings};
 
 export function getRecords() {
     return records;
 }
 
 export function getCategories() {
-    return categories;
+    const saved = settings.categories;
+    const isValid = Array.isArray(saved) && saved.length > 0 && saved.every((name) => typeof name === "string");
+    return isValid ? [...saved] : [...defaultCategories];
+}
+ 
+export function addCategory(name) {
+    settings.categories = [...getCategories(), name];
+    saveSettings(settings);
+}
+
+export function removeCategory(name) {
+    const list = getCategories();
+    if (!list.includes(name)) {
+        return { ok: false, reason: "That category does not exist."};
+    }
+    const used = records.filter((record) => record.category === name).length;
+    if (used > 0) {
+        const noun = used === 1 ? "record uses" : "record use";
+        return {ok: false, reason: used + " " + noun + "\". Change or delete them first." };
+    }
+    if (list.length === 1) {
+        return { ok: false, reason: "Keep atleast one category." };
+    }
+    settings.categories = list.filter((item) => item !== name);
+    saveSettings(settings);
+    return { ok: true, reason: ""};
 }
 
 export function getCap() {
