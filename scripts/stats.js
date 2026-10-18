@@ -1,3 +1,7 @@
+//Calculations for the dashboard. These functions only calculate:
+// they never touch the page, so they are easy to test.
+// Money is added in cents (whole numbers) because decimals add up slightly
+//wrong in JavaScript (0.1 + 0.2 gives 0.300000000000004).
 export function toCents(amount) {
     return Math.round(Number(amount) * 100);
 }

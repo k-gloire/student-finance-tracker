@@ -1,3 +1,4 @@
+//Editable category list in Settings: add a category, removed an unused one.
 import { getCategories, addCategory, removeCategory } from "./state.js";
 import { checkCategory } from "./validators.js";
 

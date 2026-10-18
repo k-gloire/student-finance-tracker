@@ -1,3 +1,7 @@
+// Safe regex search and match highlighting.
+
+// From the "Safe regex compiler" starter snippet in the assignment brief.
+// Returns null when the pattern is empty or not a valid regex.  
 export function compileRegex(input, flags = "i") {
     try {
         return input ? new RegExp(input, flags) : null;

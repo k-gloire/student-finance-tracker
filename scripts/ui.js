@@ -1,3 +1,4 @@
+// Everything the user sees and clicks: the form, the records list, the dashboard and the cap setting.
 import { validateRecord, hasErrors, collapseSpaces, checkAmount } from "./validators.js";
 import { getRecords, getCategories, getCap, setCap, addRecord, updateRecord, deleteRecord } from "./state.js";
 import { compileRegex, matchesRecord, appendHighlighted} from "./search.js";

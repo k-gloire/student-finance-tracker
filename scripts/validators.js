@@ -1,3 +1,5 @@
+//Regex rules for PRISM. Every checker returns "" when the value is valid
+//or a short error message when it is not.
 export const patterns = {
     description: /^\S(?:.*\S)?$/,
     amount: /^(0|[1-9]\d*)(\.\d{1,2})?$/,

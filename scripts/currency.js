@@ -1,3 +1,7 @@
+//Currency settings: a base currency plus two other currencies with manual rates.
+// a rate means "how many units of the BASE currency equal 1 USD = 1450 RWF.
+// currency". With base RWf, a USD rate of 1450 means 1 USD = 1450RWF.
+// That makesconverting a toatl and simple division 
 import {getCurrencies, getBaseCurrency, getRates, setCurrencySettings} from "./state.js";
 import { checkRate } from "./validators.js";
 import { formatCents } from "./stats.js";

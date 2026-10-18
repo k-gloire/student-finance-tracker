@@ -1,3 +1,4 @@
+//Holds the records and settings in memory and keeps localStorage in sync.
 import {load, loadSettings, save, saveSettings} from "./storage.js";
 
 const defaultCategories = ["Food","Transport","Entertainment","Fees","Others"];

@@ -1,3 +1,6 @@
+// Export and import of the records as a JSON file
+// the file format is a plain list of records, the same shape as seed.json,
+// so an exported file can be imported again (a "round trip").
 import { getRecords, replaceRecords } from "./state.js";
 import { validateRecordList } from "./validators.js";
 import { todayString } from "./stats.js";

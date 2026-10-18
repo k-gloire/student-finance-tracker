@@ -1,3 +1,5 @@
+// Saves and loads data in localStorage.
+// Adapted from the "Persistent state" starter snippet in the assignment brief.
 const KEY = "prism:data";
 const SETTINGS_KEY = "prism:settings";
 

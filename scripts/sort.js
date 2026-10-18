@@ -1,3 +1,9 @@
+// Sorting for the records list
+
+// A compare function gets two records (a and b) and returns:
+// a negative number if a should come first,
+// a positive number if b should come first,
+// 0 if they are equal.
 function compareDate(a, b) {
     return a.date.localeCompare(b.date);
 }
