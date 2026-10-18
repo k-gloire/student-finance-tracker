@@ -18,7 +18,7 @@ export function save(data) {
 export function loadSettings() {
     try {
         const data = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
-    const isObject = data && typeof data === "object" && !Array(data);
+    const isObject = data && typeof data === "object" && !Array.isArray(data);
     return isObject ? data : {};
     }
     catch {

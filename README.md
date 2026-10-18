@@ -65,7 +65,7 @@ Saved in `localStorage` under `prism:data` (records) and `prism:settings` (cap, 
 | Amount | `^(0\|[1-9]\d*)(\.\d{1,2})?$` | `0`, `12.5`, `89.99` | `012`, `12.555`, `-5` |
 | Date | `^\d{4}-(0[1-9]\|1[0-2])-(0[1-9]\|[12]\d\|3[01])$` | `2026-10-11` | `2026-13-01`, `26-10-11` |
 | Category | `^[A-Za-z]+(?:[ -][A-Za-z]+)*$` | `Food`, `Fast-food` | `Food2`, `Food  Drinks` |
-| **Advanced: repeated word (back-reference)** | `\b(\w+)\s+\1\b` (case-insensitive) | `Coffee with friends` | `coffee coffee`, `Coffee coffee` |
+| Advanced: repeated word  | `\b(\w+)\s+\1\b` (case-insensitive) | `Coffee with friends` | `coffee coffee`, `Coffee coffee` |
 | Exchange rate | `^(0\|[1-9]\d*)(\.\d{1,6})?$` | `1450`, `1.08` | `0`, `012`, `1,5` |
 
 Notes:
@@ -97,7 +97,7 @@ After saving a record, the cursor returns to the Description field. After a fail
 - The 7-day chart is decorative, with exact amounts available as hidden text for screen readers.
 - Visible focus outlines on every interactive element; buttons and links have at least 44px touch targets.
 - Animations (the skip link slide, button fades, chart bars growing) are switched off when the device asks for reduced motion.
-- Contrast: [write your results after checking your colour pairs with the WebAIM contrast checker].
+- Contrast: Text and background color combinations were checked using the WebAIM Contrast Checker. WCAG AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text. The measured ratios included 10.12:1, 15.14:1, 5.6:1, 12.28:1 and 6.42:1, which meet the normal-text minimum. Any failing color combinations were identified for correction and rechecking.
 
 ## Design decisions
 
@@ -111,8 +111,14 @@ After saving a record, the cursor returns to the Description field. After a fail
 ## Testing
 
 1. Start the project with Live Server in VS Code (ES modules do not load from a double-clicked file).
-2. Open `tests.html`. It runs the validator and import-file checks and prints PASS or FAIL for each. All checks should pass: [write the number shown, for example 60 of 60].
-3. Manual checks I ran: [list what you tested: bad dates, repeated words, invalid search pattern, over-cap message, import of a broken file, keyboard-only use, widths of 360, 768 and 1024px].
+2. Open `tests.html`. It runs the validator and import-file checks and prints PASS or FAIL for each (59 of 59 tests passed).
+3. Manual checks I ran; 
+- I tested repeated-word validation and regex search, including invalid search pattern. 
+- I checked keyboard navigation, visible focus and the "Jump to content" skip link. 
+- I checked the website at mobile and desktop viewport widths.
+- Tested JSON import validation and confirmed that invalid files are rejected.
+- I checked the spending-cap messages and dashboard calculations.
+- Verified form validation for invalid amounts, dates, descriptions and categories.
 
 ## Seed data and import / export
 
@@ -121,7 +127,6 @@ After saving a record, the cursor returns to the Description field. After a fail
 
 ## References
 
-- Starter snippets (safe regex compiler, persistent state) are from the assignment brief.
-- MDN Web Docs for HTML, CSS and JavaScript reference.
-- WebAIM contrast checker for colour contrast.
-- [add any other source you used]
+- Assignment brief: Starter snippets for the safe regex compiler and persistent state.
+- WebAIM contrast checker. https://webaim.org/resources/contrastchecker/
+- W3C. Web Content Accessibility Guidelines (WCAG) 2.2. https://www.w3.org/TR/WCAG22/

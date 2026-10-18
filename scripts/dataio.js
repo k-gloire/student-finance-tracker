@@ -9,8 +9,8 @@ export function exportRecords() {
     const records = getRecords();
     const json = JSON.stringify(records, null, 2);
     const blob = new Blob([json], { type:"application/json" });
-    const url = new URL.createObjectURL(blob);
-    const linl = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
     link.href = url;
     link.download = "prism-records-" + todayString() + ".json";
     document.body.append(link);
@@ -23,10 +23,18 @@ export function exportRecords() {
 
 function showProblems(problems) {
     const list = document.getElementById("import-error");
+    if (!list) return;
+
     list.replaceChildren();
     for (const problem of problems.slice(0, MAX_SHOWN)) {
         const item = document.createElement("li");
-        more.textContent = "...and " + (problems.length - MAX_SHOWN) + " more.";
+        item.textContent = problem;
+        list.append(more);
+    }
+
+    if (problems.length > MAX_SHOWN) {
+        const more = document.createElement("li");
+        more.textContent = "...and " + (problems.length - MAX_SHOWN) + "more.";
         list.append(more);
     }
 }

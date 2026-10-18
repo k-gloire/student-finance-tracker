@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="witdth=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>PRISM tests</title>
 <link rel="stylesheet" href="styles/main.css">
 <style>
@@ -38,20 +38,20 @@
                 category: "Food",
                 date: "2026-10-11",
                 createdAt: "2026-10-11T10:00:00.0000Z",
-                updatedAt: "2026-110-11T10:00:00.0000Z",
+                updatedAt: "2026-10-11T10:00:00.0000Z",
             };
 
             const tests = [
                 ["Amount: 0 is valid",checkAmount,"0",true],
                 ["Amount: 12 is valid",checkAmount,"12",true],
                 ["Amount: 12.5 is valid",checkAmount,"12.5",true],
-                ["Amount: 89.99 is valid",checkAmount,"89.99"],
+                ["Amount: 89.99 is valid",checkAmount,"89.99",true],
                 ["Amount: leading zero 014 is rejected",checkAmount,"014",false],
                 ["Amount: 3 decimals 10.9899 is rejected",checkAmount,"10.9899",false],
-                ["Amount:neagtive -4 is rejected",checkAmount,"-5",false],
+                ["Amount:  negative -4 is rejected",checkAmount,"-5",false],
                 ["Amount: letters abc are rejected",checkAmount,"abc",false],
                 ["Amount: .5 is rejected",checkAmount,".5",false],
-                ["Amount: 1,000 is rejected",checkAmount,"1000",false],
+                ["Amount: 1,000 is rejected",checkAmount,"1,000",false],
                 ["Amount: empty is rejected",checkAmount,"",false],
 
                 ["Description: Lunch at cafeteria is valid",checkDescription,"Lunch at cafeteria",true],
@@ -64,8 +64,8 @@
                 ["Description: empty is rejected",checkDescription,"",false],
 
                 ["Date: 2026-10-11 is valid",checkDate,"2026-10-11",true],
-                ["Date: leap day 2024-05-25 is valid",checkDate,"2024-05-25",true],
-                ["Date: 2025-02-20 is rejected (not a leap year)",checkDate,"2025-02-20",false],
+                ["Date: leap day 2024-02-29 is valid",checkDate,"2024-02-29",true],
+                ["Date: 2025-02-29 is rejected (not a leap year)",checkDate,"2025-02-29",false],
                 ["Date: month 13 is rejected",checkDate,"2026-13-01",false],
                 ["Date: month 00 is rejected",checkDate,"2026-00-11",false],
                 ["Date: two-digit year is rejected",checkDate,"26-10-11",false],
@@ -74,9 +74,9 @@
 
                 ["Category: Food is valid",checkCategory,"Food",true],
                 ["Category: Fast-food is valid",checkCategory,"Fast-food",true],
-                ["Category: Food Drinks is valid",checkCategory,"Food  Drinks",true],
+                ["Category: Food Drinks is valid",checkCategory,"Food Drinks",true],
                 ["Category: digits Food2 are rejected",checkCategory,"Food2",false],
-                ["Category: double space is rejected",checkCategory,"Food Drinks",false],
+                ["Category: double space is rejected",checkCategory,"Food  Drinks",false],
                 ["Category: leading hyphen is rejected",checkCategory,"-Food",false],
                 ["Category: trailing hyphen is rejected",checkCategory,"Food-",false],
                 ["Category: empty is rejected",checkCategory,"",false],
@@ -86,12 +86,12 @@
                 ["Rate: 1.05 is valid", checkRate, "1.05", true],
                 ["Rate: 0.000001 is valid", checkRate, "0.000001", true],
                 ["Rate: 7 decimals id rejected", checkRate, "0.00000001", false],
-                ["Rate: sero is rejected", checkRate, "0", false],
+                ["Rate: zero is rejected", checkRate, "0", false],
                 ["Rate: leading zero 015 is rejected", checkRate, "015", false],
                 ["Rate: letters are rejected", checkRate, "xyz", false],
                 ["Rate: comma 1,8 is rejected", checkRate, "1,8", false],
 
-                ["Import: one goood record is valid", checkImport, [good], true],
+                ["Import: one good record is valid", checkImport, [good], true],
                 ["Import: an empty list is valid", checkImport, [], true],
                 ["Import: amount 0.01 is valid", checkImport, [{ ...good,amount: 0.01}], true],
                 ["Import: repeated word is allowed in files", checkImport, [{ ...good, description: "coffee coffee" }], true],
@@ -101,7 +101,7 @@
                 ["Import: impossible date 2026-02-31 is rejected", checkImport, [{ ...good, date: "2026-02-31" }], false],
                 ["Import: amount as a text is rejected", checkImport, [{ ...good, amount: "1.344"}], false],
                 ["Import: negative amount is rejected", checkImport, [{ ...good, amount: -1}], false],
-                ["Import:  3 decimals is rejected", checkImport, [{ ...good, amount: "1.233" }], false],
+                ["Import:  3 decimals is rejected", checkImport, [{ ...good, amount: 1.233 }], false],
                 ["Import: leading space in description is rejected", checkImport, [{ ...good, description: " x"}], false],
                 ["Import: category with a digit is rejected", checkImport, [{ ...good, category: "Food2" }], false],
                 ["Import: missing id is rejected", checkImport, [{ ...good, id: undefined }], false],
@@ -114,7 +114,7 @@
             const summary = document.getElementById("summary");
             let passed = 0;
 
-            for (const [name, chacker, input,shouldBeValid] of tests) {
+            for (const [name, checker, input,shouldBeValid] of tests) {
                 const isValid = checker(input) === "";
                 const ok = isValid === shouldBeValid;
                 console.assert(ok, "FAILED: " +name);
@@ -128,7 +128,7 @@
                 }
                 list.append(item);
             }
-        summary.textContent = passed + "of" + tests.length + "tests passed";
+        summary.textContent = passed + " of " + tests.length + " tests passed";
         </script>
     </body>
 </html>

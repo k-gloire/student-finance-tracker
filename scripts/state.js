@@ -3,7 +3,7 @@ import {load, loadSettings, save, saveSettings} from "./storage.js";
 const defaultCategories = ["Food","Transport","Entertainment","Fees","Others"];
 const currencies = ["RWF", "USD", "EUR"];
 const records = load();
-const settings = { cap: null, baseCurrency: "RWf", rates: {}, categories: [...defaultCategories], ...loadSettings};
+const settings = { cap: null, baseCurrency: "RWF", rates: {}, categories: [...defaultCategories], ...loadSettings()};
 
 export function getRecords() {
     return records;
@@ -77,7 +77,7 @@ function nextId() {
     return "txn_" + String(highest + 1).padStart(4, "0");
 }
 
-export function addRecord({ description, amount, category,date}) {
+export function addRecord({ description, amount, category, date}) {
     const now = new Date().toISOString();
     const record = {
         id: nextId(),
@@ -102,7 +102,7 @@ export function updateRecord(id, {description,amount,category,date}) {
     record.amount = Number(amount);
     record.category = category;
     record.date = date;
-    record.updateAt = new Date().toISOString();
+    record.updatedAt = new Date().toISOString();
     save(records);
     return;
 }
@@ -112,7 +112,7 @@ export function replaceRecords(list) {
         id: item.id,
         description: item.description,
         amount: item.amount,
-        category: item,category,
+        category: item.category,
         date: item.date,
         createdAt: item.createdAt,
         updatedAt: item.updatedAt
@@ -139,7 +139,7 @@ export function importRecords(importedRecords) {
     typeof record.category === "string" && typeof record.date === "string");
 
     if (validRecords.length !== importedRecords.length) {
-        throw new Error("Some records aremissing required fields.");
+        throw new Error("Some records are missing required fields.");
     }
     records.splice(0, records.length,...validRecords);
     save(records);

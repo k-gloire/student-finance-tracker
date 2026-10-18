@@ -50,7 +50,7 @@ h2 {
     font-size: 1.4rem;
 }
 
-.skip-link:focus {
+.skip-link {
   position: absolute;
   top: -4rem;
   left: var(--space-2);
@@ -58,11 +58,11 @@ h2 {
   padding: var(--space-1) var(--space-2);
   color: rgb(238, 233, 233);
   background: var(--color-accent);
-  border-radius:var(--radius);
+  border-radius: var(--radius);
   transition: top 0.2s ease;
 }
 
-.skip-link{
+.skip-link:focus {
     top: var(--space-2);
 }
 
@@ -103,15 +103,16 @@ nav a{
     align-items: center;
     min-height: 44px;
     padding: 0 var(--space-2);
-    color: #080808;
+    color: #fcfbfb;
     text-decoration: none;
     border: 2px solid rgb(59, 8, 59);
     border-radius: var(--radius);
-    transition: background-color 0.15s ease;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 nav a:hover{
     background: var(--color-accent-hover);
+    color: var(--color-text);
 }
 
 main{
@@ -171,8 +172,11 @@ footer p{
         scroll-behavior: auto;
     }
 
-    .skip-link,
-    nav a {
-        transition: none;
-    }
-} 
+   *::before,
+   *::after {
+    animation-duration:  0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+   }
+}

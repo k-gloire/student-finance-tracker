@@ -16,9 +16,12 @@ export function checkDescription(value) {
         return "Description is required.";
     }
     if (!patterns.description.test(value)){
-        return "A word is repeated";
+        return "Remove the spaces at the beginning or end.";
     }
-    return "";
+    if (patterns.repetedWord.test(value)) {
+        return "Avoid repeating the same word.";
+      }  
+      return "";
 }
 
 export function checkAmount(value) {
@@ -53,7 +56,7 @@ export function checkCategory(value) {
         return "Category is required";
     }
     if (!patterns.category.test(value)) {
-        return "Use letters only.";
+        return "Use letters with singlr spaces or hyphens between words.";
     }
     return "";
 }
@@ -78,7 +81,7 @@ function isMoney(amount) {
 
 export function validateRecordList(data) {
     if (!Array.isArray(data)) {
-        return ["The file must contain a list of records (a JSON array."];
+        return ["The file must contain a list of records (a JSON array)."];
     }
 
     const problems = [];
@@ -105,7 +108,7 @@ export function validateRecordList(data) {
         }
 
         if (typeof item.amount !== "number" || !isMoney(item.amount)) {
-            add ("amount", "must be a number" || !isMoney(item.amount));
+            add ("amount", "must be a number with no more than two decimal places.");
         }
 
         if (typeof item.category !== "string" || !patterns.category.test(item.category)) {

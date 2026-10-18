@@ -24,13 +24,14 @@ export function totalCents(records) {
 
 export function topCategory(records) {
     const totals = new Map();
+
     for (const record of records) {
         const so_far = totals.get(record.category) || 0;
         totals.set(record.category, so_far + toCents(record.amount));
     }
 
-
     let best = null;
+
     for (const [name, cents] of totals) {
         if (best === null || cents > best.cents) {
             best = { name, cents };
